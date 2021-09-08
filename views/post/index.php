@@ -6,6 +6,7 @@
 
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
+use yii\bootstrap4\LinkPager;
 use yii\captcha\Captcha;
 use yii\helpers\Url;
 
@@ -51,19 +52,14 @@ $this->title = 'My Yii Application';
                 </div>
             </div>
         </div>
-        <div class="pagination">
-            <div class="nav-links">
-                <?=\yii\widgets\LinkPager::widget(['pagination' => $pages]) ?>
-            </div>
-        </div>
+        <?=  LinkPager::widget([
+            'pagination' => $pages,
+            'options' => [
+                'class' => 'pagination pagination-circle pg-blue mb-0'],
+            'linkOptions' => ['class' => 'page-link'],
+        ]) ?>
         <a class="btn btn-outline-secondary" href=<?=\yii\helpers\Url::to(['post/new']); ?>>Создать новый пост</a>
         </p>
-
-    </div>
-
-    <div class="body-content">
-
         </div>
-
     </div>
 </div>

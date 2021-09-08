@@ -48,12 +48,15 @@ class UserController extends Controller
         if($model->load(\Yii::$app->request->post())){
             if($user = $model->signup()){
                 \Yii::$app->getSession()->setFlash('success', 'Вы успешно зарегистрировались!');
-
                 $auth = \Yii::$app->authManager;
                 $authorRole = $auth->getRole('user');
                 $auth->assign($authorRole, $user->getId());
 
-                return \Yii::$app->runAction('post/index');
+                $identity = $user::findOne(['email' => $model->email]);
+
+                if(\Yii::$app->user->login($identity)){
+                    return \Yii::$app->runAction('post/index');
+                }
             }
         }
         return $this->render('signup', [

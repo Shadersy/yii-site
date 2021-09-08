@@ -3,12 +3,15 @@
 /* @var $this yii\web\View */
 
 
-use yii\widgets\LinkPager;
+use yii\bootstrap4\LinkPager;
 
 $this->title = 'My Yii Application';
 ?>
 
 <div class="site-index">
+
+
+
     <div class="body-content">
 
         <div class="row">
@@ -27,14 +30,16 @@ $this->title = 'My Yii Application';
         <?php endforeach; ?>
 
 
-    <div class="pagination">
-        <div class="nav-links">
-            <?=  LinkPager::widget([
-                'pagination' => $pages,
-            ]) ?>
-        </div>
-    </div>
-    </div>
+
+                 <?=  LinkPager::widget([
+                        'pagination' => $pages,
+                        'options' => [
+                                'class' => 'pagination pagination-circle pg-blue mb-0'],
+                       'linkOptions' => ['class' => 'page-link'],
+                    ]) ?>
+
+
+            </div>
         </div>
     </div>
 </div>
