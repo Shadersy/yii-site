@@ -2,13 +2,7 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'pgsql:host='host';port=5432;dbname='dbname',
-    'username' => 'username',
-    'password' => 'password',
-    'charset' => 'utf8',
-
-    // Schema cache options (for production environment)
-    //'enableSchemaCache' => true,
-    //'schemaCacheDuration' => 60,
-    //'schemaCache' => 'cache',
+    'dsn' => 'pgsql:host=172.23.0.5;port=5432;dbname=yii',
+    'username' => 'retailcrm',
+    'password' => 'retailcrm',
 ];
