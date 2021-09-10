@@ -8,7 +8,7 @@ use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 use yii\captcha\Captcha;
 
-$this->title = 'Edit post';
+$this->title = 'Редактирование поста';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-contact">
@@ -33,17 +33,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php else: ?>
 
-        <p>
-            Редактирование поста
-        </p>
-
         <div class="row">
             <div class="col-lg-5">
 
                 <?php $form = ActiveForm::begin(['id' => 'post-form']); ?>
 
-                <?= $form->field($model, 'name')->textInput(['autofocus' => true, 'value' => $post->name]) ?>
-                <?= $form->field($model, 'description')->textInput(['value' => $post->description]) ?>
+                <?= $form->field($model, 'name')->textInput(['autofocus' => true, 'value' => $post->name])->label('Заголовок') ?>
+                <?= $form->field($model, 'description')->textInput(['value' => $post->description])->label('Описание') ?>
 
                 <div class="form-group">
                     <?= Html::submitButton('Изменить', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>

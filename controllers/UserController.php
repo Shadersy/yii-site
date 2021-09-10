@@ -7,6 +7,7 @@ use yii\web\Controller;
 use yii\web\Response;
 use app\models\SignupForm;
 use app\models\LoginForm;
+use app\models\ChangePasswordForm;
 
 
 class UserController extends Controller
@@ -60,6 +61,19 @@ class UserController extends Controller
             }
         }
         return $this->render('signup', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionChangepassword()
+    {
+        $model = new ChangePasswordForm();
+        if($model->load(\Yii::$app->request->post())){
+           if($model->changePassword()){
+               return \Yii::$app->runAction('post/index');
+           }
+        }
+        return $this->render('changePassword', [
             'model' => $model,
         ]);
     }

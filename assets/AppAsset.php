@@ -23,6 +23,9 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
+        'js/delaunator.min.js',
+        'js/TweenMax.min.js',
+        'js/about.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

@@ -28,12 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
 
-    <?= $form->field($model, 'password')->passwordInput() ?>
+    <?= $form->field($model, 'password')->passwordInput()->label('Пароль') ?>
 
     <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
         'captchaAction' => '/user/captcha',
         'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-10">{input}</div></div>',
-    ]) ?>
+    ])->label('Введите код с картинки') ?>
 
 
             <div class="form-group">

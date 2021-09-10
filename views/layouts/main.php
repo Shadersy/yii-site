@@ -53,7 +53,8 @@ AppAsset::register($this);
                 )
                 . Html::endForm()
                 . '</li>'
-            )
+            ),
+            Yii::$app->user->isGuest ? '' : ['label' => 'Сменить пароль', 'url' => ['/user/changepassword']],
         ],
     ]);
     NavBar::end();

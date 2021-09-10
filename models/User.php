@@ -3,6 +3,7 @@
 namespace app\models;
 
 use yii\base\NotSupportedException;
+use yii\base\Security;
 use yii\db\ActiveRecord;
 
 /**
@@ -12,6 +13,7 @@ use yii\db\ActiveRecord;
  * @property string $password
  * @property string $email
  * @property string $auth_key
+ * @property string password_reset_token
  */
 class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
@@ -84,6 +86,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     }
 
     public function beforeSave($insert){
+
         if(parent::beforeSave($insert)){
             if($insert){
                 $this->generateAuthKey();
@@ -99,5 +102,39 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     public function setPassword($password)
     {
         $this->password = \Yii::$app->security->generatePasswordHash($password);
+        $this->save();
     }
+
+    public function findByPasswordResetToken($token)
+    {
+       if(!static::isPasswordResetTokenValid($token)){
+           return null;
+       }
+       return static::findOne([
+          'password_reset_token' => $token,
+       ]);
+    }
+
+    public function generatePasswordResetToken()
+    {
+        $this->password_reset_token = \Yii::$app->security->generateRandomString() . '_' . time();
+    }
+
+    public function removePasswordResetToken()
+    {
+        $this->password_reset_token = null;
+    }
+
+    public static function isPasswordResetTokenValid($token)
+    {
+        if(empty($token)){
+            return false;
+        }
+        $expire = \Yii::$app->params['user.passwordResetTokenExpire'];
+        $parts = explode('_', $token);
+        $timestamp = (int) end($parts);
+
+        return $timestamp + $expire >= time();
+    }
+
 }

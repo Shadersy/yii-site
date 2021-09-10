@@ -17,7 +17,7 @@ class SignupForm extends Model
         return [
 
             ['email', 'filter', 'filter' => 'trim'],
-            ['email', 'required'],
+            ['email', 'required', 'message' => 'email должен быть заполнен'],
             ['email', 'email'],
             ['email', 'unique', 'targetClass' => User::className(), 'message' => 'This email address has already been taken.'],
 
